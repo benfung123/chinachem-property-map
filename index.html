@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>華懋集團物業地圖 | Chinachem Group Property Map</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-icon">🏢</span>
+                <div class="logo-text">
+                    <h1>華懋集團物業地圖</h1>
+                    <span class="subtitle">Chinachem Group Property Portfolio</span>
+                </div>
+            </div>
+            <div class="header-stats">
+                <div class="stat">
+                    <span class="stat-number" id="total-count">0</span>
+                    <span class="stat-label">總物業數</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="filter-section">
+                <h3>🏷️ 物業類型篩選</h3>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-category="all">
+                        <span class="icon">📋</span> 全部顯示
+                    </button>
+                    <button class="filter-btn" data-category="commercial">
+                        <span class="icon">🏢</span> 商業辦公
+                    </button>
+                    <button class="filter-btn" data-category="retail">
+                        <span class="icon">🛍️</span> 零售商場
+                    </button>
+                    <button class="filter-btn" data-category="residential">
+                        <span class="icon">🏠</span> 住宅項目
+                    </button>
+                    <button class="filter-btn" data-category="hotel">
+                        <span class="icon">🏨</span> 酒店服務
+                    </button>
+                    <button class="filter-btn" data-category="other">
+                        <span class="icon">📍</span> 其他設施
+                    </button>
+                </div>
+            </div>
+
+            <div class="property-list-section">
+                <h3>📑 物業列表</h3>
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="搜尋物業名稱...">
+                </div>
+                <div class="property-list" id="property-list">
+                    <!-- Property items will be inserted here -->
+                </div>
+            </div>
+        </aside>
+
+        <!-- Map Container -->
+        <main class="map-container">
+            <div id="map"></div>
+            
+            <!-- Legend -->
+            <div class="legend">
+                <h4>圖例</h4>
+                <div class="legend-item">
+                    <span class="legend-icon commercial"></span>
+                    <span>商業辦公</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-icon retail"></span>
+                    <span>零售商場</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-icon residential"></span>
+                    <span>住宅項目</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-icon hotel"></span>
+                    <span>酒店服務</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-icon other"></span>
+                    <span>其他設施</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 POC Demo - 華懋集團物業地圖 | Data collected from public sources</p>
+    </footer>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="properties-data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
