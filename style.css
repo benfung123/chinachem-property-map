@@ -22,6 +22,7 @@
     --retail-color: #38a169;
     --residential-color: #e53e3e;
     --hotel-color: #805ad5;
+    --healthcare-color: #e91e63;
     --other-color: #718096;
 }
 
@@ -251,6 +252,7 @@ body {
 .tag.retail { background: #c6f6d5; color: #22543d; }
 .tag.residential { background: #fed7d7; color: #742a2a; }
 .tag.hotel { background: #e9d8fd; color: #553c9a; }
+.tag.healthcare { background: #fce4ec; color: #880e4f; }
 .tag.other { background: #e2e8f0; color: #2d3748; }
 
 /* Map Container */
@@ -294,6 +296,7 @@ body {
 .popup-header.retail { background: var(--retail-color); }
 .popup-header.residential { background: var(--residential-color); }
 .popup-header.hotel { background: var(--hotel-color); }
+.popup-header.healthcare { background: var(--healthcare-color); }
 .popup-header.other { background: var(--other-color); }
 
 .popup-header h3 {
@@ -361,6 +364,7 @@ body {
 .legend-icon.retail { background: var(--retail-color); }
 .legend-icon.residential { background: var(--residential-color); }
 .legend-icon.hotel { background: var(--hotel-color); }
+.legend-icon.healthcare { background: var(--healthcare-color); }
 .legend-icon.other { background: var(--other-color); }
 
 /* Footer */

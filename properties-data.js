@@ -270,9 +270,37 @@ const properties = [
         area: null
     },
 
+    // 醫療護理 Healthcare
+    {
+        id: 61,
+        name: "松齡護老院舍 - 荃灣",
+        nameEn: "Pine Care Elderly Home - Tsuen Wan",
+        category: "healthcare",
+        address: "荃灣",
+        addressEn: "Tsuen Wan",
+        coordinates: [22.3720, 114.1150],
+        description: "松齡護理集團旗下院舍，提供專業長者護理服務",
+        year: null,
+        floors: null,
+        area: null
+    },
+    {
+        id: 62,
+        name: "松齡護老院舍 - 深水埗",
+        nameEn: "Pine Care Elderly Home - Sham Shui Po",
+        category: "healthcare",
+        address: "深水埗",
+        addressEn: "Sham Shui Po",
+        coordinates: [22.3310, 114.1620],
+        description: "松齡護理集團旗下院舍，提供專業長者護理服務",
+        year: null,
+        floors: null,
+        area: null
+    },
+
     // 其他 Others
     {
-        id: 51,
+        id: 52,
         name: "如心園",
         nameEn: "Nina Park",
         category: "other",
@@ -283,19 +311,6 @@ const properties = [
         year: 2023,
         floors: null,
         area: "70,000平方呎"
-    },
-    {
-        id: 52,
-        name: "松齡護老院舍",
-        nameEn: "Pine Care Group",
-        category: "other",
-        address: "香港多個地點",
-        addressEn: "Multiple locations in Hong Kong",
-        coordinates: [22.3150, 114.1700],
-        description: "康健護理業務，為長者提供護理服務",
-        year: null,
-        floors: null,
-        area: null
     }
 ];
 
@@ -324,6 +339,12 @@ const categoryConfig = {
         labelEn: "Hotel",
         color: "#805ad5",
         icon: "🏨"
+    },
+    healthcare: {
+        label: "醫療護理",
+        labelEn: "Healthcare",
+        color: "#e91e63",
+        icon: "🏥"
     },
     other: {
         label: "其他設施",
