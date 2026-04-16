@@ -717,3 +717,12 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--text-secondary);
 }
+
+
+/* Complex tag styling */
+.tag.complex {
+    background-color: #6b7280;
+    color: white;
+    font-size: 0.75rem;
+}
+

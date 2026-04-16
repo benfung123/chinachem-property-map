@@ -5,9 +5,10 @@ const properties = [
     // 商業辦公 Commercial
     {
         id: 1,
-        name: "如心廣場",
-        nameEn: "Nina Tower",
+        name: "如心廣場 (商業)",
+        nameEn: "Nina Tower (Office)",
         category: "commercial",
+        complex: "Nina Tower",
         address: "荃灣楊屋道8號",
         addressEn: "8 Yeung Uk Road, Tsuen Wan",
         coordinates: [22.3697, 114.1146],
@@ -18,6 +19,58 @@ const properties = [
     },
     {
         id: 2,
+        name: "華懋中心一期",
+        nameEn: "One Chinachem Central",
+        category: "commercial",
+        address: "中環德輔道中26號",
+        addressEn: "26 Des Voeux Road Central, Central",
+        coordinates: [22.2831, 114.1565],
+        description: "中環甲級商廈，16層，2016年落成",
+        year: 2016,
+        floors: 16,
+        area: "38,000平方呎"
+    },
+    {
+        id: 3,
+        name: "華懋中心二期",
+        nameEn: "Two Chinachem Central",
+        category: "commercial",
+        address: "中環德輔道中26號",
+        addressEn: "26 Des Voeux Road Central, Central",
+        coordinates: [22.2829, 114.1563],
+        description: "中環甲級商廈，22層，2017年落成",
+        year: 2017,
+        floors: 22,
+        area: "60,000平方呎"
+    },
+    {
+        id: 4,
+        name: "華懋大廈",
+        nameEn: "Chinachem Tower",
+        category: "commercial",
+        address: "中環干諾道中34-37號",
+        addressEn: "34-37 Connaught Road Central, Central",
+        coordinates: [22.2850, 114.1570],
+        description: "中環核心商業區單一業權商廈，鄰近中環港鐵站",
+        year: null,
+        floors: null,
+        area: null
+    },
+    {
+        id: 5,
+        name: "華懋世紀廣場",
+        nameEn: "Chinachem Century Tower",
+        category: "commercial",
+        address: "灣仔告士打道178號",
+        addressEn: "178 Gloucester Road, Wan Chai",
+        coordinates: [22.2785, 114.1725],
+        description: "灣仔單一業權商廈，1994年落成，26層辦公樓",
+        year: 1994,
+        floors: 26,
+        area: "93,000平方呎"
+    },
+    {
+        id: 6,
         name: "One Hennessy",
         nameEn: "One Hennessy",
         category: "commercial",
@@ -30,7 +83,7 @@ const properties = [
         area: null
     },
     {
-        id: 3,
+        id: 7,
         name: "華懋中心 I期",
         nameEn: "Chinachem Centre Phase 1",
         category: "commercial",
@@ -43,7 +96,7 @@ const properties = [
         area: null
     },
     {
-        id: 4,
+        id: 8,
         name: "華懋中心 II期",
         nameEn: "Chinachem Centre Phase 2",
         category: "commercial",
@@ -56,7 +109,7 @@ const properties = [
         area: null
     },
     {
-        id: 5,
+        id: 9,
         name: "華懋金馬倫中心",
         nameEn: "Chinachem Cameron Centre",
         category: "commercial",
@@ -69,7 +122,7 @@ const properties = [
         area: null
     },
     {
-        id: 6,
+        id: 10,
         name: "華懋333廣場",
         nameEn: "Chinachem 333 Plaza",
         category: "commercial",
@@ -82,46 +135,7 @@ const properties = [
         area: null
     },
     {
-        id: 7,
-        name: "華懋廣場 II期",
-        nameEn: "Chinachem Plaza Phase 2",
-        category: "commercial",
-        address: "荃灣",
-        addressEn: "Tsuen Wan",
-        coordinates: [22.3680, 114.1160],
-        description: "荃灣商業大廈",
-        year: null,
-        floors: null,
-        area: null
-    },
-    {
-        id: 8,
-        name: "華懋禮頓廣場",
-        nameEn: "Chinachem Leighton Plaza",
-        category: "commercial",
-        address: "銅鑼灣禮頓道",
-        addressEn: "Leighton Road, Causeway Bay",
-        coordinates: [22.2775, 114.1850],
-        description: "銅鑼灣商業大廈",
-        year: null,
-        floors: null,
-        area: null
-    },
-    {
-        id: 9,
-        name: "華懋荷李活中心",
-        nameEn: "Chinachem Hollywood Centre",
-        category: "commercial",
-        address: "上環荷李活道",
-        addressEn: "Hollywood Road, Sheung Wan",
-        coordinates: [22.2850, 114.1510],
-        description: "上環商業大廈",
-        year: null,
-        floors: null,
-        area: null
-    },
-    {
-        id: 10,
+        id: 11,
         name: "利園八期",
         nameEn: "Lee Garden Eight",
         category: "commercial",
@@ -133,19 +147,6 @@ const properties = [
         floors: null,
         area: "1,000,000+平方呎"
     },
-    {
-        id: 11,
-        name: "華懋荃灣廣場",
-        nameEn: "Chinachem Tsuen Wan Plaza",
-        category: "commercial",
-        address: "荃灣大壩街",
-        addressEn: "Tai Pa Street, Tsuen Wan",
-        coordinates: [22.3705, 114.1120],
-        description: "荃灣商業大廈",
-        year: null,
-        floors: null,
-        area: null
-    },
 
     // 零售商場 Retail
     {
@@ -153,6 +154,7 @@ const properties = [
         name: "如心廣場商場",
         nameEn: "Nina Mall",
         category: "retail",
+        complex: "Nina Tower",
         address: "荃灣楊屋道8號",
         addressEn: "8 Yeung Uk Road, Tsuen Wan",
         coordinates: [22.3695, 114.1140],
@@ -169,10 +171,10 @@ const properties = [
         address: "荃灣青山公路",
         addressEn: "Castle Peak Road, Tsuen Wan",
         coordinates: [22.3760, 114.1115],
-        description: "大型購物商場",
+        description: "大型購物商場，2024年6月收購",
         year: null,
         floors: null,
-        area: null
+        area: "630,000平方呎"
     },
     {
         id: 23,
@@ -187,59 +189,61 @@ const properties = [
         floors: null,
         area: null
     },
+    {
+        id: 24,
+        name: "NINA MALL 1",
+        nameEn: "NINA MALL 1",
+        category: "retail",
+        complex: "Nina Tower",
+        address: "荃灣楊屋道8號",
+        addressEn: "8 Yeung Uk Road, Tsuen Wan",
+        coordinates: [22.3685, 114.1135],
+        description: "如心廣場一期商場，170,000平方呎，55間商舖",
+        year: null,
+        floors: null,
+        area: "170,000平方呎"
+    },
+    {
+        id: 25,
+        name: "NINA MALL 2",
+        nameEn: "NINA MALL 2",
+        category: "retail",
+        complex: "Nina Tower",
+        address: "荃灣西站",
+        addressEn: "Tsuen Wan West",
+        coordinates: [22.3710, 114.1160],
+        description: "如心廣場二期商場，100,000平方呎，44間商舖",
+        year: null,
+        floors: null,
+        area: "100,000平方呎"
+    },
 
-    // 住宅項目 Residential
+    // 住宅項目 Residential (Currently Available Only)
     {
         id: 31,
         name: "瑜一 (In One)",
         nameEn: "In One",
         category: "residential",
-        address: "何文田忠孝街",
-        addressEn: "Chung Hau Street, Ho Man Tin",
+        address: "何文田忠孝街1號",
+        addressEn: "1 Chung Hau Street, Ho Man Tin",
         coordinates: [22.3160, 114.1830],
-        description: "何文田豪宅項目",
+        description: "何文田豪宅項目，現正發售",
         year: null,
         floors: null,
         area: null
     },
     {
         id: 32,
-        name: "瑜悅",
-        nameEn: "Nina's Residence",
-        category: "residential",
-        address: "荃灣",
-        addressEn: "Tsuen Wan",
-        coordinates: [22.3710, 114.1150],
-        description: "荃灣住宅項目",
-        year: null,
-        floors: null,
-        area: null
-    },
-    {
-        id: 33,
         name: "WHITESAND COVE",
         nameEn: "WHITESAND COVE",
         category: "residential",
-        address: "西貢白沙灣",
-        addressEn: "Pak Sha Wan, Sai Kung",
+        address: "西貢白沙灣162號",
+        addressEn: "162 Hiram's Highway, Hebe Haven, Sai Kung",
         coordinates: [22.3830, 114.2660],
-        description: "西貢低密度尊貴住宅，40戶臨海洋房",
+        description: "西貢低密度尊貴住宅，40戶臨海洋房，現正發售",
         year: null,
         floors: null,
         area: "833-3,162平方呎"
-    },
-    {
-        id: 34,
-        name: "東涌牽引配電站住宅發展項目",
-        nameEn: "Tung Chung Traction Substation Residential",
-        category: "residential",
-        address: "東涌新市鎮東部",
-        addressEn: "Eastern Tung Chung",
-        coordinates: [22.2890, 113.9450],
-        description: "香港最大規模MiC住宅發展項目，1,982個單位",
-        year: null,
-        floors: null,
-        area: "1,982個單位"
     },
 
     // 酒店 Hotels
@@ -248,106 +252,103 @@ const properties = [
         name: "荃灣西如心酒店",
         nameEn: "Nina Hotel Tsuen Wan West",
         category: "hotel",
+        complex: "Nina Tower",
         address: "荃灣楊屋道8號",
         addressEn: "8 Yeung Uk Road, Tsuen Wan",
         coordinates: [22.3700, 114.1150],
-        description: "五星級酒店，1,608間客房及套房（31-108平方米），新界最高建築，與如心廣場相連。連接200+餐廳、6個商場、3間戲院及荃灣西港鐵站。設施包括RÚ中餐廳、Café Circles自助餐廳、Nina Patisserie、室外泳池、健身中心。會議場地3,617平方米（全港最大），Nina宴會廳1,710平方米可容納1,600人。",
+        description: "五星級酒店，1,608間客房及套房，新界最高建築。設施包括RÚ中餐廳、Café Circles自助餐廳、室外泳池、健身中心。3,617平方米會議場地（全港最大）。",
         year: 2006,
-        floors: null,
+        floors: 88,
         area: "1,608間客房",
         contact: "+852 2280 2898",
         email: "info.tww@ninahotelgroup.com",
-        website: "https://www.ninahotelgroup.com/en/nina-hotel-tsuen-wan-west",
-        features: [
-            "1,608間客房及套房（31-108平方米）",
-            "連接荃灣西港鐵站",
-            "機場直達巴士",
-            "RÚ中餐廳",
-            "Café Circles自助餐廳",
-            "Nina Patisserie",
-            "室外泳池",
-            "健身中心",
-            "3,617平方米會議場地（全港最大）",
-            "Nina宴會廳1,710平方米（容納1,600人）"
-        ]
+        website: "https://www.ninahotelgroup.com/en/nina-hotel-tsuen-wan-west"
     },
     {
         id: 42,
         name: "銅鑼灣如心酒店",
         nameEn: "Nina Hotel Causeway Bay",
         category: "hotel",
-        address: "銅鑼灣",
-        addressEn: "Causeway Bay",
-        coordinates: [22.2780, 114.1820],
-        description: "如心酒店集團旗下酒店",
+        address: "銅鑼灣英皇道18號",
+        addressEn: "18 King's Road, Causeway Bay",
+        coordinates: [22.2780, 114.1920],
+        description: "37層都會酒店，275間客房，鄰近天后港鐵站。設有室外泳池、健身室、阿翁小館粵菜餐廳、Nina Patisserie。",
         year: null,
-        floors: null,
-        area: null
+        floors: 37,
+        area: "275間客房",
+        contact: "+852 3968 8388",
+        email: "info.cwb@ninahotelgroup.com",
+        website: "https://www.ninahotelgroup.com/en/nina-hotel-causeway-bay"
     },
     {
         id: 43,
-        name: "如心酒店南灣",
+        name: "如心酒店 · 南灣",
         nameEn: "Nina Hotel Island South",
         category: "hotel",
-        address: "香港仔",
-        addressEn: "Aberdeen, Hong Kong Island",
+        address: "香港仔黃竹坑道55號",
+        addressEn: "55 Wong Chuk Hang Road, Aberdeen",
         coordinates: [22.2480, 114.1550],
-        description: "如心酒店集團旗下酒店，位於香港仔",
+        description: "精品酒店，位於黃竹坑商貿區，鄰近港鐵黃竹坑站",
         year: null,
         floors: null,
-        area: null
+        area: null,
+        website: "https://www.ninahotelgroup.com/en/nina-hotel-island-south"
     },
     {
         id: 44,
-        name: "如心酒店東九龍",
+        name: "如心酒店 · 東九龍",
         nameEn: "Nina Hotel Kowloon East",
         category: "hotel",
-        address: "九龍東",
-        addressEn: "Kowloon East",
+        address: "九龍灣創業街38號",
+        addressEn: "38 Chung Yiu Street, Kowloon Bay",
         coordinates: [22.3190, 114.2140],
-        description: "如心酒店集團旗下酒店，位於九龍東",
+        description: "商務酒店，位於九龍東商貿區",
         year: null,
         floors: null,
-        area: null
+        area: null,
+        website: "https://www.ninahotelgroup.com/en/nina-hotel-kowloon-east"
     },
     {
         id: 45,
-        name: "Lodgewood Mong Kok",
-        nameEn: "Lodgewood Mong Kok",
+        name: "木的地酒店 · 旺角",
+        nameEn: "Lodgewood by Nina Mong Kok",
         category: "hotel",
-        address: "旺角",
-        addressEn: "Mongkok",
+        address: "旺角廣東道1131號",
+        addressEn: "1131 Canton Road, Mong Kok",
         coordinates: [22.3160, 114.1700],
-        description: "如心酒店集團旗下服務式住宅",
+        description: "精品服務式住宅，位於旺角核心地帶",
         year: null,
         floors: null,
-        area: null
+        area: null,
+        website: "https://www.ninahotelgroup.com/en/lodgewood-mong-kok"
     },
     {
         id: 46,
-        name: "Lodgewood Wan Chai",
-        nameEn: "Lodgewood Wan Chai",
+        name: "薈賢居 · 灣仔",
+        nameEn: "Lodgewood by Nina Wan Chai",
         category: "hotel",
-        address: "灣仔",
-        addressEn: "Wan Chai",
+        address: "灣仔莊士敦道60號",
+        addressEn: "60 Johnston Road, Wan Chai",
         coordinates: [22.2760, 114.1750],
-        description: "如心酒店集團旗下服務式住宅",
+        description: "服務式住宅，位於灣仔商業區",
         year: null,
         floors: null,
-        area: null
+        area: null,
+        website: "https://www.ninahotelgroup.com/en/lodgewood-wan-chai"
     },
     {
         id: 47,
         name: "The Lily",
         nameEn: "The Lily",
         category: "hotel",
-        address: "大角咀",
-        addressEn: "Tai Kok Tsui",
-        coordinates: [22.3190, 114.1600],
-        description: "如心酒店集團旗下住宅項目",
+        address: "淺水灣道129號",
+        addressEn: "129 Repulse Bay Road, Repulse Bay",
+        coordinates: [22.2340, 114.1980],
+        description: "淺水灣豪華住宅項目，由Nina Hospitality管理",
         year: null,
         floors: null,
-        area: null
+        area: null,
+        website: "https://www.ninahotelgroup.com/en/the-lily"
     },
 
     // 醫療護理 Healthcare - 松齡護老集團 (12間院舍)
@@ -514,6 +515,7 @@ const properties = [
         name: "如心園",
         nameEn: "Nina Park",
         category: "other",
+        complex: "Nina Tower",
         address: "荃灣楊屋道8號旁",
         addressEn: "Next to 8 Yeung Uk Road, Tsuen Wan",
         coordinates: [22.3685, 114.1135],
@@ -564,7 +566,7 @@ const categoryConfig = {
     }
 };
 
-// 导出數據（如果在模塊環境中使用）
+// 導出數據（如果在模塊環境中使用）
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = { properties, categoryConfig };
 }

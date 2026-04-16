@@ -376,8 +376,26 @@ function updateSelectedFilterBadge() {
         const config = categoryConfig[currentFilter];
         if (config) {
             const label = currentLang === 'zh' ? config.label : config.labelEn;
-            const count = properties.filter(p => p.category === currentFilter).length;
-            badge.textContent = config.icon + ' ' + label + ' (' + count + ')';
+            const filteredProps = properties.filter(p => p.category === currentFilter);
+            const count = filteredProps.length;
+            
+            // Check if any properties in this category are part of a complex
+            const complexProps = filteredProps.filter(p => p.complex);
+            let badgeText = config.icon + ' ' + label + ' (' + count + ')';
+            
+            // If all properties are from the same complex, show complex name
+            if (complexProps.length > 0 && complexProps.length === filteredProps.length) {
+                const complexName = complexProps[0].complex;
+                badgeText += ' · ' + complexName;
+            } else if (complexProps.length > 0) {
+                // Mixed - some with complex, some without
+                const uniqueComplexes = [...new Set(complexProps.map(p => p.complex))];
+                if (uniqueComplexes.length === 1) {
+                    badgeText += ' · ' + uniqueComplexes[0] + '+';
+                }
+            }
+            
+            badge.textContent = badgeText;
             badge.style.display = 'inline-block';
             badge.style.backgroundColor = config.color;
         }
@@ -448,6 +466,7 @@ function renderPropertyList(propertiesToRender = null) {
             <div class="address">${displayAddress}</div>
             <div class="tags">
                 <span class="tag ${property.category}">${getCategoryLabel(property.category)}</span>
+                ${property.complex ? `<span class="tag complex">${property.complex}</span>` : ''}
                 ${property.year ? `<span class="tag">${property.year}${t.yearSuffix}</span>` : ''}
             </div>
         `;
