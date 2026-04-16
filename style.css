@@ -205,11 +205,37 @@ body {
     margin-bottom: 0;
 }
 
-.filter-header h3 {
+.filter-title-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.filter-title-row h3 {
     font-size: 1rem;
     font-weight: 600;
     color: var(--text-primary);
     margin: 0;
+}
+
+.selected-filter-badge {
+    display: none;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 12px;
+    background: var(--primary-color);
+    color: white;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.filter-section.collapsed .selected-filter-badge {
+    display: inline-block;
+}
+
+.filter-section.collapsed .selected-filter-badge:empty {
+    display: none;
 }
 
 .collapse-btn {

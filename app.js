@@ -177,6 +177,9 @@ function applyLanguage(lang) {
     // 重新渲染物業列表以更新類別標籤
     renderPropertyList();
     
+    // 更新選中篩選標籤
+    updateSelectedFilterBadge();
+    
     // 更新所有彈出窗口
     updateAllPopups();
 }
@@ -346,6 +349,9 @@ function initFilters() {
             // 獲取篩選類別
             currentFilter = this.dataset.category;
             
+            // 更新選中標籤顯示
+            updateSelectedFilterBadge();
+            
             // 更新地圖標記
             filterMarkers();
             
@@ -353,6 +359,28 @@ function initFilters() {
             renderPropertyList();
         });
     });
+    
+    // 初始化選中標籤
+    updateSelectedFilterBadge();
+}
+
+// 更新選中篩選標籤顯示
+function updateSelectedFilterBadge() {
+    const badge = document.getElementById('selected-filter-badge');
+    if (!badge) return;
+    
+    if (currentFilter === 'all') {
+        badge.textContent = '';
+        badge.style.display = 'none';
+    } else {
+        const config = categoryConfig[currentFilter];
+        if (config) {
+            const label = currentLang === 'zh' ? config.label : config.labelEn;
+            badge.textContent = config.icon + ' ' + label;
+            badge.style.display = 'inline-block';
+            badge.style.backgroundColor = config.color;
+        }
+    }
 }
 
 // 篩選標記
