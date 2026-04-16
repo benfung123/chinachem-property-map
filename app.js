@@ -7,15 +7,212 @@
 let map;
 let markers = [];
 let currentFilter = 'all';
+let currentLang = localStorage.getItem('preferredLang') || 'zh';
+
+// 多語言翻譯對象
+const i18n = {
+    zh: {
+        site: {
+            title: '華懋集團物業地圖',
+            subtitle: 'Chinachem Group Property Portfolio'
+        },
+        stats: {
+            total: '總物業數'
+        },
+        filter: {
+            title: '🏷️ 物業類型篩選',
+            all: '全部顯示',
+            commercial: '商業辦公',
+            retail: '零售商場',
+            residential: '住宅項目',
+            hotel: '酒店服務',
+            healthcare: '醫療護理',
+            other: '其他設施'
+        },
+        list: {
+            title: '📑 物業列表'
+        },
+        search: {
+            placeholder: '搜尋物業名稱...'
+        },
+        legend: {
+            title: '圖例',
+            commercial: '商業辦公',
+            retail: '零售商場',
+            residential: '住宅項目',
+            hotel: '酒店服務',
+            healthcare: '醫療護理',
+            other: '其他設施'
+        },
+        popup: {
+            type: '類型',
+            address: '地址',
+            year: '落成年份',
+            floors: '層數',
+            area: '面積',
+            description: '描述'
+        },
+        footer: {
+            text: '© 2026 POC Demo - 華懋集團物業地圖 | Data collected from public sources'
+        },
+        yearSuffix: '年'
+    },
+    en: {
+        site: {
+            title: 'Chinachem Group Property Map',
+            subtitle: 'Chinachem Group Property Portfolio'
+        },
+        stats: {
+            total: 'Total Properties'
+        },
+        filter: {
+            title: '🏷️ Filter by Category',
+            all: 'Show All',
+            commercial: 'Commercial',
+            retail: 'Retail',
+            residential: 'Residential',
+            hotel: 'Hotels',
+            healthcare: 'Healthcare',
+            other: 'Others'
+        },
+        list: {
+            title: '📑 Property List'
+        },
+        search: {
+            placeholder: 'Search property name...'
+        },
+        legend: {
+            title: 'Legend',
+            commercial: 'Commercial',
+            retail: 'Retail',
+            residential: 'Residential',
+            hotel: 'Hotels',
+            healthcare: 'Healthcare',
+            other: 'Others'
+        },
+        popup: {
+            type: 'Type',
+            address: 'Address',
+            year: 'Year Completed',
+            floors: 'Floors',
+            area: 'Area',
+            description: 'Description'
+        },
+        footer: {
+            text: '© 2026 POC Demo - Chinachem Group Property Map | Data collected from public sources'
+        },
+        yearSuffix: ''
+    }
+};
+
+// 類別配置
+const categoryConfig = {
+    commercial: { icon: '🏢', color: '#2d5a7b', labelZh: '商業辦公', labelEn: 'Commercial' },
+    retail: { icon: '🛍️', color: '#4a7c59', labelZh: '零售商場', labelEn: 'Retail' },
+    residential: { icon: '🏠', color: '#c75146', labelZh: '住宅項目', labelEn: 'Residential' },
+    hotel: { icon: '🏨', color: '#6b4c7a', labelZh: '酒店服務', labelEn: 'Hotels' },
+    healthcare: { icon: '🏥', color: '#d35d8a', labelZh: '醫療護理', labelEn: 'Healthcare' },
+    other: { icon: '📍', color: '#7d8a93', labelZh: '其他設施', labelEn: 'Others' }
+};
 
 // 初始化地圖
 document.addEventListener('DOMContentLoaded', function() {
+    initLanguage();
     initMap();
     initFilters();
     initSearch();
+    initLanguageToggle();
     renderPropertyList();
     updateTotalCount();
 });
+
+// 初始化語言
+function initLanguage() {
+    applyLanguage(currentLang);
+}
+
+// 應用語言
+function applyLanguage(lang) {
+    currentLang = lang;
+    const t = i18n[lang];
+    
+    // 更新所有帶有 data-i18n 屬性的元素
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const value = getNestedValue(t, key);
+        if (value) {
+            // 保留圖標（emoji）
+            const icon = el.querySelector('.icon');
+            if (icon) {
+                const textSpan = el.querySelector('span:not(.icon)');
+                if (textSpan) {
+                    textSpan.textContent = value;
+                } else {
+                    el.childNodes.forEach(node => {
+                        if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
+                            node.textContent = ' ' + value;
+                        }
+                    });
+                }
+            } else {
+                el.textContent = value;
+            }
+        }
+    });
+    
+    // 更新 placeholder
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        const value = getNestedValue(t, key);
+        if (value) {
+            el.placeholder = value;
+        }
+    });
+    
+    // 更新語言切換按鈕
+    const langToggle = document.getElementById('lang-toggle');
+    if (langToggle) {
+        const currentSpan = langToggle.querySelector('.lang-current');
+        const otherSpan = langToggle.querySelector('.lang-other');
+        if (currentSpan && otherSpan) {
+            currentSpan.textContent = lang === 'zh' ? '繁' : 'EN';
+            otherSpan.textContent = lang === 'zh' ? 'EN' : '繁';
+        }
+    }
+    
+    // 更新網頁語言屬性
+    document.documentElement.lang = lang === 'zh' ? 'zh-HK' : 'en';
+    
+    // 重新渲染物業列表以更新類別標籤
+    renderPropertyList();
+    
+    // 更新所有彈出窗口
+    updateAllPopups();
+}
+
+// 獲取嵌套對象值
+function getNestedValue(obj, path) {
+    return path.split('.').reduce((current, key) => current && current[key], obj);
+}
+
+// 初始化語言切換
+function initLanguageToggle() {
+    const langToggle = document.getElementById('lang-toggle');
+    if (langToggle) {
+        langToggle.addEventListener('click', () => {
+            const newLang = currentLang === 'zh' ? 'en' : 'zh';
+            localStorage.setItem('preferredLang', newLang);
+            applyLanguage(newLang);
+        });
+    }
+}
+
+// 獲取當前語言的類別標籤
+function getCategoryLabel(category) {
+    const config = categoryConfig[category];
+    if (!config) return category;
+    return currentLang === 'zh' ? config.labelZh : config.labelEn;
+}
 
 // 初始化地圖
 function initMap() {
@@ -70,47 +267,58 @@ function addPropertyMarkers() {
 
 // 創建彈出窗口內容
 function createPopupContent(property) {
-    const config = categoryConfig[property.category];
+    const t = i18n[currentLang];
+    const displayName = currentLang === 'zh' ? property.name : property.nameEn;
+    const displayAddress = currentLang === 'zh' ? property.address : property.addressEn;
     
     return `
         <div class="popup-content">
             <div class="popup-header ${property.category}">
-                <h3>${config.icon} ${property.name}</h3>
+                <h3>${displayName}</h3>
             </div>
             <div class="popup-body">
                 <div class="info-row">
-                    <span class="label">類型</span>
-                    <span class="value">${config.label}</span>
+                    <span class="label">${t.popup.type}</span>
+                    <span class="value">${getCategoryLabel(property.category)}</span>
                 </div>
                 <div class="info-row">
-                    <span class="label">地址</span>
-                    <span class="value">${property.address}</span>
+                    <span class="label">${t.popup.address}</span>
+                    <span class="value">${displayAddress}</span>
                 </div>
                 ${property.year ? `
                 <div class="info-row">
-                    <span class="label">落成年份</span>
+                    <span class="label">${t.popup.year}</span>
                     <span class="value">${property.year}</span>
                 </div>
                 ` : ''}
                 ${property.floors ? `
                 <div class="info-row">
-                    <span class="label">層數</span>
-                    <span class="value">${property.floors}層</span>
+                    <span class="label">${t.popup.floors}</span>
+                    <span class="value">${property.floors}${t.yearSuffix ? ' ' + t.popup.floors.split(' ')[0] : ''}</span>
                 </div>
                 ` : ''}
                 ${property.area ? `
                 <div class="info-row">
-                    <span class="label">面積</span>
+                    <span class="label">${t.popup.area}</span>
                     <span class="value">${property.area}</span>
                 </div>
                 ` : ''}
                 <div class="info-row">
-                    <span class="label">描述</span>
+                    <span class="label">${t.popup.description}</span>
                     <span class="value">${property.description}</span>
                 </div>
             </div>
         </div>
     `;
+}
+
+// 更新所有彈出窗口
+function updateAllPopups() {
+    properties.forEach(property => {
+        if (property.marker) {
+            property.marker.setPopupContent(createPopupContent(property));
+        }
+    });
 }
 
 // 初始化篩選功能
@@ -165,7 +373,8 @@ function initSearch() {
             const filtered = properties.filter(p => 
                 p.name.toLowerCase().includes(query) ||
                 p.nameEn.toLowerCase().includes(query) ||
-                p.address.toLowerCase().includes(query)
+                p.address.toLowerCase().includes(query) ||
+                (p.addressEn && p.addressEn.toLowerCase().includes(query))
             );
             renderPropertyList(filtered);
         }
@@ -176,6 +385,7 @@ function initSearch() {
 function renderPropertyList(propertiesToRender = null) {
     const listContainer = document.getElementById('property-list');
     let displayProperties = propertiesToRender || properties;
+    const t = i18n[currentLang];
     
     // 如果沒有指定篩選，應用當前篩選
     if (!propertiesToRender && currentFilter !== 'all') {
@@ -187,16 +397,17 @@ function renderPropertyList(propertiesToRender = null) {
     
     // 生成列表項
     displayProperties.forEach(property => {
-        const config = categoryConfig[property.category];
+        const displayName = currentLang === 'zh' ? property.name : property.nameEn;
+        const displayAddress = currentLang === 'zh' ? property.address : property.addressEn;
         
         const item = document.createElement('div');
         item.className = 'property-item';
         item.innerHTML = `
-            <div class="name">${config.icon} ${property.name}</div>
-            <div class="address">${property.address}</div>
+            <div class="name">${displayName}</div>
+            <div class="address">${displayAddress}</div>
             <div class="tags">
-                <span class="tag ${property.category}">${config.label}</span>
-                ${property.year ? `<span class="tag">${property.year}年</span>` : ''}
+                <span class="tag ${property.category}">${getCategoryLabel(property.category)}</span>
+                ${property.year ? `<span class="tag">${property.year}${t.yearSuffix}</span>` : ''}
             </div>
         `;
         

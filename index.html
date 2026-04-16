@@ -19,14 +19,21 @@
             <div class="logo">
                 <span class="logo-icon">◆</span>
                 <div class="logo-text">
-                    <h1>華懋集團物業地圖</h1>
-                    <span class="subtitle">Chinachem Group Property Portfolio</span>
+                    <h1 data-i18n="site.title">華懋集團物業地圖</h1>
+                    <span class="subtitle" data-i18n="site.subtitle">Chinachem Group Property Portfolio</span>
                 </div>
             </div>
-            <div class="header-stats">
-                <div class="stat">
-                    <span class="stat-number" id="total-count">0</span>
-                    <span class="stat-label">總物業數</span>
+            <div class="header-actions">
+                <button class="lang-toggle" id="lang-toggle" title="Switch Language">
+                    <span class="lang-current">繁</span>
+                    <span class="lang-separator">|</span>
+                    <span class="lang-other">EN</span>
+                </button>
+                <div class="header-stats">
+                    <div class="stat">
+                        <span class="stat-number" id="total-count">0</span>
+                        <span class="stat-label" data-i18n="stats.total">總物業數</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -36,36 +43,36 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="filter-section">
-                <h3>🏷️ 物業類型篩選</h3>
+                <h3 data-i18n="filter.title">🏷️ 物業類型篩選</h3>
                 <div class="filter-buttons">
                     <button class="filter-btn active" data-category="all">
-                        <span class="icon">📋</span> 全部顯示
+                        <span class="icon">📋</span> <span data-i18n="filter.all">全部顯示</span>
                     </button>
                     <button class="filter-btn" data-category="commercial">
-                        <span class="icon">🏢</span> 商業辦公
+                        <span class="icon">🏢</span> <span data-i18n="filter.commercial">商業辦公</span>
                     </button>
                     <button class="filter-btn" data-category="retail">
-                        <span class="icon">🛍️</span> 零售商場
+                        <span class="icon">🛍️</span> <span data-i18n="filter.retail">零售商場</span>
                     </button>
                     <button class="filter-btn" data-category="residential">
-                        <span class="icon">🏠</span> 住宅項目
+                        <span class="icon">🏠</span> <span data-i18n="filter.residential">住宅項目</span>
                     </button>
                     <button class="filter-btn" data-category="hotel">
-                        <span class="icon">🏨</span> 酒店服務
+                        <span class="icon">🏨</span> <span data-i18n="filter.hotel">酒店服務</span>
                     </button>
                     <button class="filter-btn" data-category="healthcare">
-                        <span class="icon">🏥</span> 醫療護理
+                        <span class="icon">🏥</span> <span data-i18n="filter.healthcare">醫療護理</span>
                     </button>
                     <button class="filter-btn" data-category="other">
-                        <span class="icon">📍</span> 其他設施
+                        <span class="icon">📍</span> <span data-i18n="filter.other">其他設施</span>
                     </button>
                 </div>
             </div>
 
             <div class="property-list-section">
-                <h3>📑 物業列表</h3>
+                <h3 data-i18n="list.title">📑 物業列表</h3>
                 <div class="search-box">
-                    <input type="text" id="search-input" placeholder="搜尋物業名稱...">
+                    <input type="text" id="search-input" data-i18n-placeholder="search.placeholder" placeholder="搜尋物業名稱...">
                 </div>
                 <div class="property-list" id="property-list">
                     <!-- Property items will be inserted here -->
@@ -79,30 +86,30 @@
             
             <!-- Legend -->
             <div class="legend">
-                <h4>圖例</h4>
+                <h4 data-i18n="legend.title">圖例</h4>
                 <div class="legend-item">
                     <span class="legend-icon commercial"></span>
-                    <span>商業辦公</span>
+                    <span data-i18n="legend.commercial">商業辦公</span>
                 </div>
                 <div class="legend-item">
                     <span class="legend-icon retail"></span>
-                    <span>零售商場</span>
+                    <span data-i18n="legend.retail">零售商場</span>
                 </div>
                 <div class="legend-item">
                     <span class="legend-icon residential"></span>
-                    <span>住宅項目</span>
+                    <span data-i18n="legend.residential">住宅項目</span>
                 </div>
                 <div class="legend-item">
                     <span class="legend-icon hotel"></span>
-                    <span>酒店服務</span>
+                    <span data-i18n="legend.hotel">酒店服務</span>
                 </div>
                 <div class="legend-item">
                     <span class="legend-icon healthcare"></span>
-                    <span>醫療護理</span>
+                    <span data-i18n="legend.healthcare">醫療護理</span>
                 </div>
                 <div class="legend-item">
                     <span class="legend-icon other"></span>
-                    <span>其他設施</span>
+                    <span data-i18n="legend.other">其他設施</span>
                 </div>
             </div>
         </main>
@@ -110,7 +117,7 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <p>© 2026 POC Demo - 華懋集團物業地圖 | Data collected from public sources</p>
+        <p data-i18n="footer.text">© 2026 POC Demo - 華懋集團物業地圖 | Data collected from public sources</p>
     </footer>
 
     <!-- Leaflet JS -->
