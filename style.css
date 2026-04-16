@@ -183,19 +183,66 @@ body {
 .filter-section {
     padding: 1.5rem;
     border-bottom: 1px solid var(--border-color);
+    transition: all 0.3s ease;
 }
 
-.filter-section h3 {
+.filter-section.collapsed {
+    padding: 1rem 1.5rem;
+}
+
+.filter-section.collapsed .filter-buttons {
+    display: none;
+}
+
+.filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.filter-section.collapsed .filter-header {
+    margin-bottom: 0;
+}
+
+.filter-header h3 {
     font-size: 1rem;
     font-weight: 600;
-    margin-bottom: 1rem;
     color: var(--text-primary);
+    margin: 0;
+}
+
+.collapse-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.collapse-btn:hover {
+    color: var(--primary-color);
+}
+
+.collapse-icon {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.filter-section.collapsed .collapse-icon {
+    transform: rotate(-90deg);
 }
 
 .filter-buttons {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    transition: all 0.3s ease;
+    overflow: hidden;
 }
 
 .filter-btn {

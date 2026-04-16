@@ -112,6 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initFilters();
     initSearch();
     initLanguageToggle();
+    initFilterCollapse();
     renderPropertyList();
     updateTotalCount();
 });
@@ -193,6 +194,26 @@ function initLanguageToggle() {
             const newLang = currentLang === 'zh' ? 'en' : 'zh';
             localStorage.setItem('preferredLang', newLang);
             applyLanguage(newLang);
+        });
+    }
+}
+
+// 初始化篩選區域收起功能
+function initFilterCollapse() {
+    const collapseBtn = document.getElementById('collapse-filter');
+    const filterSection = document.getElementById('filter-section');
+    
+    if (collapseBtn && filterSection) {
+        // Check saved state
+        const isCollapsed = localStorage.getItem('filterCollapsed') === 'true';
+        if (isCollapsed) {
+            filterSection.classList.add('collapsed');
+        }
+        
+        collapseBtn.addEventListener('click', () => {
+            filterSection.classList.toggle('collapsed');
+            const collapsed = filterSection.classList.contains('collapsed');
+            localStorage.setItem('filterCollapsed', collapsed);
         });
     }
 }

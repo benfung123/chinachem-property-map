@@ -42,9 +42,14 @@
     <div class="main-container">
         <!-- Sidebar -->
         <aside class="sidebar">
-            <div class="filter-section">
-                <h3 data-i18n="filter.title">🏷️ 物業類型篩選</h3>
-                <div class="filter-buttons">
+            <div class="filter-section" id="filter-section">
+                <div class="filter-header">
+                    <h3 data-i18n="filter.title">🏷️ 物業類型篩選</h3>
+                    <button class="collapse-btn" id="collapse-filter" title="收起/展開">
+                        <span class="collapse-icon">▼</span>
+                    </button>
+                </div>
+                <div class="filter-buttons" id="filter-buttons">
                     <button class="filter-btn active" data-category="all">
                         <span class="icon">📋</span> <span data-i18n="filter.all">全部顯示</span>
                     </button>
