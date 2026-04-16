@@ -105,16 +105,6 @@ const i18n = {
     }
 };
 
-// 類別配置
-const categoryConfig = {
-    commercial: { icon: '🏢', color: '#2d5a7b', labelZh: '商業辦公', labelEn: 'Commercial' },
-    retail: { icon: '🛍️', color: '#4a7c59', labelZh: '零售商場', labelEn: 'Retail' },
-    residential: { icon: '🏠', color: '#c75146', labelZh: '住宅項目', labelEn: 'Residential' },
-    hotel: { icon: '🏨', color: '#6b4c7a', labelZh: '酒店服務', labelEn: 'Hotels' },
-    healthcare: { icon: '🏥', color: '#d35d8a', labelZh: '醫療護理', labelEn: 'Healthcare' },
-    other: { icon: '📍', color: '#7d8a93', labelZh: '其他設施', labelEn: 'Others' }
-};
-
 // 初始化地圖
 document.addEventListener('DOMContentLoaded', function() {
     initLanguage();
@@ -209,9 +199,10 @@ function initLanguageToggle() {
 
 // 獲取當前語言的類別標籤
 function getCategoryLabel(category) {
+    // Use categoryConfig from properties-data.js
     const config = categoryConfig[category];
     if (!config) return category;
-    return currentLang === 'zh' ? config.labelZh : config.labelEn;
+    return currentLang === 'zh' ? config.label : config.labelEn;
 }
 
 // 初始化地圖
@@ -294,7 +285,7 @@ function createPopupContent(property) {
                 ${property.floors ? `
                 <div class="info-row">
                     <span class="label">${t.popup.floors}</span>
-                    <span class="value">${property.floors}${t.yearSuffix ? ' ' + t.popup.floors.split(' ')[0] : ''}</span>
+                    <span class="value">${property.floors}${currentLang === 'zh' ? '層' : 'F'}</span>
                 </div>
                 ` : ''}
                 ${property.area ? `
