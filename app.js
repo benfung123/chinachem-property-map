@@ -376,7 +376,8 @@ function updateSelectedFilterBadge() {
         const config = categoryConfig[currentFilter];
         if (config) {
             const label = currentLang === 'zh' ? config.label : config.labelEn;
-            badge.textContent = config.icon + ' ' + label;
+            const count = properties.filter(p => p.category === currentFilter).length;
+            badge.textContent = config.icon + ' ' + label + ' (' + count + ')';
             badge.style.display = 'inline-block';
             badge.style.backgroundColor = config.color;
         }
