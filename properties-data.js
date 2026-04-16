@@ -343,12 +343,11 @@ const properties = [
         category: "hotel",
         address: "淺水灣道129號",
         addressEn: "129 Repulse Bay Road, Repulse Bay",
-        coordinates: [22.2340, 114.1980],
-        description: "淺水灣豪華住宅項目，由Nina Hospitality管理",
-        year: null,
+        coordinates: [22.23542, 114.20007],
+        description: "淺水灣豪華住宅項目，由Nina Hospitality管理。4座相連大樓設計如盛開百合花，100個單位(1,305-5,315平方呎)，建築師Sir Norman Foster，2010年落成，獲亞太區五星級高層建築獎。",
+        year: 2010,
         floors: null,
-        area: null,
-        website: "https://www.ninahotelgroup.com/en/the-lily"
+        area: "100個單位"
     },
 
     // 醫療護理 Healthcare - 松齡護老集團 (12間院舍)
