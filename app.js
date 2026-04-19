@@ -205,6 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initLanguageToggle();
     initDashboardCollapse();
     initAdvancedFilterCollapse();
+    initMobileBottomSheet(); // Initialize mobile bottom sheet
     renderPropertyList();
     updateTotalCount();
     updateDashboard();
@@ -1169,10 +1170,292 @@ function renderPropertyList(propertiesToRender = null) {
 // 更新總數
 function updateTotalCount() {
     const filteredProps = getFilteredProperties();
-    document.getElementById('total-count').textContent = filteredProps.length;
+    const totalElement = document.getElementById('total-count');
+    if (totalElement) {
+        totalElement.textContent = filteredProps.length;
+    }
+    // Update mobile stat if present
+    const mobileTotal = document.getElementById('mobile-total');
+    if (mobileTotal) {
+        mobileTotal.textContent = filteredProps.length;
+    }
 }
 
 // 重置地圖視圖
 function resetMapView() {
     map.setView([22.3193, 114.1694], 11);
 }
+
+// ==================== MOBILE BOTTOM SHEET ====================
+
+// Initialize mobile bottom sheet
+function initMobileBottomSheet() {
+    // Only on mobile
+    if (window.innerWidth > 640) return;
+    
+    const bottomSheet = document.getElementById('mobile-bottom-sheet');
+    const handle = document.getElementById('bottom-sheet-handle');
+    const filterToggle = document.getElementById('mobile-filter-toggle');
+    const filterPanel = document.getElementById('mobile-filter-panel');
+    const viewToggle = document.getElementById('mobile-view-toggle');
+    
+    if (!bottomSheet) return;
+    
+    // Initialize in collapsed state
+    bottomSheet.classList.add('collapsed');
+    
+    // Touch/drag handling
+    let startY = 0;
+    let currentY = 0;
+    let isDragging = false;
+    let startTransform = 0;
+    
+    handle.addEventListener('touchstart', (e) => {
+        startY = e.touches[0].clientY;
+        isDragging = true;
+        bottomSheet.style.transition = 'none';
+    }, { passive: true });
+    
+    handle.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        currentY = e.touches[0].clientY;
+        const deltaY = currentY - startY;
+        
+        // Calculate current transform based on state
+        const sheetHeight = bottomSheet.offsetHeight;
+        let baseTransform = 0;
+        if (bottomSheet.classList.contains('collapsed')) {
+            baseTransform = sheetHeight - 110;
+        }
+        
+        const newTransform = Math.max(0, Math.min(baseTransform + deltaY, sheetHeight - 50));
+        bottomSheet.style.transform = `translateY(${newTransform}px)`;
+    }, { passive: true });
+    
+    handle.addEventListener('touchend', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        bottomSheet.style.transition = 'transform 0.3s ease';
+        
+        const deltaY = currentY - startY;
+        const threshold = 50;
+        
+        if (bottomSheet.classList.contains('collapsed')) {
+            // Dragging up from collapsed state
+            if (deltaY < -threshold) {
+                expandBottomSheet();
+            } else {
+                collapseBottomSheet();
+            }
+        } else {
+            // Dragging down from expanded state
+            if (deltaY > threshold) {
+                collapseBottomSheet();
+            } else {
+                expandBottomSheet();
+            }
+        }
+    });
+    
+    // Click to toggle
+    handle.addEventListener('click', () => {
+        if (bottomSheet.classList.contains('collapsed')) {
+            expandBottomSheet();
+        } else {
+            collapseBottomSheet();
+        }
+    });
+    
+    // Filter toggle
+    if (filterToggle && filterPanel) {
+        filterToggle.addEventListener('click', () => {
+            filterToggle.classList.toggle('active');
+            filterPanel.classList.toggle('open');
+            if (filterPanel.classList.contains('open')) {
+                expandBottomSheet();
+            }
+        });
+    }
+    
+    // View toggle button (floating button)
+    if (viewToggle) {
+        viewToggle.addEventListener('click', () => {
+            if (bottomSheet.classList.contains('collapsed')) {
+                expandBottomSheet();
+            } else {
+                collapseBottomSheet();
+            }
+        });
+    }
+    
+    // Initialize mobile filters
+    initMobileFilters();
+    
+    // Render mobile property list
+    renderMobilePropertyList();
+}
+
+function collapseBottomSheet() {
+    const bottomSheet = document.getElementById('mobile-bottom-sheet');
+    if (!bottomSheet) return;
+    
+    bottomSheet.classList.add('collapsed');
+    bottomSheet.classList.remove('full');
+    bottomSheet.style.transform = '';
+}
+
+function expandBottomSheet() {
+    const bottomSheet = document.getElementById('mobile-bottom-sheet');
+    if (!bottomSheet) return;
+    
+    bottomSheet.classList.remove('collapsed');
+    bottomSheet.classList.add('full');
+    bottomSheet.style.transform = '';
+}
+
+// Initialize mobile filters
+function initMobileFilters() {
+    // Region chips
+    document.querySelectorAll('.mobile-region-chips .mobile-chip').forEach(chip => {
+        chip.addEventListener('click', function() {
+            const region = this.dataset.region;
+            
+            document.querySelectorAll('.mobile-region-chips .mobile-chip').forEach(c => c.classList.remove('active'));
+            this.classList.add('active');
+            
+            if (region === 'all') {
+                currentFilter.regions = [];
+                currentFilter.districts = [];
+            } else {
+                currentFilter.regions = [region];
+                // Auto-select districts in this region
+                currentFilter.districts = Object.keys(districtConfig).filter(d => 
+                    districtConfig[d].region === region
+                );
+            }
+            
+            applyFilters();
+            renderMobilePropertyList();
+        });
+    });
+    
+    // Category chips
+    const categoryChips = document.getElementById('mobile-category-chips');
+    if (categoryChips) {
+        categoryChips.innerHTML = `
+            <button class="mobile-chip active" data-category="all">全部</button>
+        ` + Object.keys(categoryConfig).map(cat => `
+            <button class="mobile-chip" data-category="${cat}">
+                ${currentLang === 'zh' ? categoryConfig[cat].label : categoryConfig[cat].labelEn}
+            </button>
+        `).join('');
+        
+        categoryChips.querySelectorAll('.mobile-chip').forEach(chip => {
+            chip.addEventListener('click', function() {
+                const category = this.dataset.category;
+                
+                categoryChips.querySelectorAll('.mobile-chip').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                
+                currentFilter.category = category;
+                applyFilters();
+                renderMobilePropertyList();
+            });
+        });
+    }
+}
+
+// Render mobile property list
+function renderMobilePropertyList(propertiesToRender = null) {
+    const listContainer = document.getElementById('mobile-property-list');
+    if (!listContainer) return;
+    
+    const displayProperties = propertiesToRender || getFilteredProperties();
+    
+    listContainer.innerHTML = '';
+    
+    if (displayProperties.length === 0) {
+        listContainer.innerHTML = `<div class="no-results">${currentLang === 'zh' ? '沒有符合條件的物業' : 'No properties match'}</div>`;
+        return;
+    }
+    
+    displayProperties.forEach(property => {
+        const displayName = currentLang === 'zh' ? property.name : property.nameEn;
+        const displayAddress = currentLang === 'zh' ? property.address : property.addressEn;
+        
+        const item = document.createElement('div');
+        item.className = 'mobile-property-item';
+        item.innerHTML = `
+            <div class="name">
+                <span>${categoryConfig[property.category]?.icon || ''}</span>
+                ${displayName}
+            </div>
+            <div class="address">${displayAddress}</div>
+            <div class="tags">
+                <span class="tag ${property.category}">${getCategoryLabel(property.category)}</span>
+                ${property.year ? `<span class="tag">${property.year}</span>` : ''}
+            </div>
+        `;
+        
+        item.addEventListener('click', () => {
+            map.setView(property.coordinates, 16);
+            property.marker.openPopup();
+            // Collapse sheet after selection
+            collapseBottomSheet();
+        });
+        
+        listContainer.appendChild(item);
+    });
+}
+
+// Override applyFilters to also update mobile UI
+const originalApplyFilters = applyFilters;
+applyFilters = function() {
+    const filteredProps = getFilteredProperties();
+    
+    // Update map markers
+    properties.forEach(property => {
+        const marker = property.marker;
+        const isVisible = filteredProps.includes(property);
+        
+        if (isVisible) {
+            if (!map.hasLayer(marker)) {
+                marker.addTo(map);
+            }
+        } else {
+            if (map.hasLayer(marker)) {
+                map.removeLayer(marker);
+            }
+        }
+    });
+    
+    // Update desktop list
+    const desktopList = document.getElementById('property-list');
+    if (desktopList && window.innerWidth > 640) {
+        renderPropertyList(filteredProps);
+    }
+    
+    // Update mobile list
+    renderMobilePropertyList(filteredProps);
+    
+    // Update dashboard
+    updateDashboard();
+    
+    // Update filter badge
+    updateActiveFilterBadge();
+    
+    // Update total counts
+    updateTotalCount();
+};
+
+// Initialize mobile bottom sheet on load and resize
+window.addEventListener('load', initMobileBottomSheet);
+window.addEventListener('resize', () => {
+    const bottomSheet = document.getElementById('mobile-bottom-sheet');
+    if (window.innerWidth <= 640) {
+        if (!bottomSheet.classList.contains('initialized')) {
+            initMobileBottomSheet();
+            bottomSheet.classList.add('initialized');
+        }
+    }
+});
