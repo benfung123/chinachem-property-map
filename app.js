@@ -316,8 +316,20 @@ function initDashboardCollapse() {
     const dashboardSection = document.getElementById('dashboard-section');
     
     if (collapseBtn && dashboardSection) {
-        const isCollapsed = localStorage.getItem('dashboardCollapsed') === 'true';
-        if (isCollapsed) {
+        // Check if mobile (screen width <= 640px)
+        const isMobile = window.innerWidth <= 640;
+        const savedState = localStorage.getItem('dashboardCollapsed');
+        
+        // On mobile, default to collapsed unless user explicitly expanded it
+        // On desktop, use saved state or default to expanded
+        let shouldCollapse = false;
+        if (savedState !== null) {
+            shouldCollapse = savedState === 'true';
+        } else if (isMobile) {
+            shouldCollapse = true;
+        }
+        
+        if (shouldCollapse) {
             dashboardSection.classList.add('collapsed');
         }
         
@@ -335,8 +347,21 @@ function initAdvancedFilterCollapse() {
     const filterSection = document.getElementById('advanced-filter-section');
     
     if (collapseBtn && filterSection) {
-        const isCollapsed = localStorage.getItem('advancedFilterCollapsed') !== 'false';
-        if (isCollapsed) {
+        // Check if mobile (screen width <= 640px)
+        const isMobile = window.innerWidth <= 640;
+        const savedState = localStorage.getItem('advancedFilterCollapsed');
+        
+        // On mobile, default to collapsed unless user explicitly expanded it
+        // On desktop, use saved state (default collapsed was original behavior)
+        let shouldCollapse = true;
+        if (savedState !== null) {
+            shouldCollapse = savedState === 'true';
+        } else if (!isMobile) {
+            // On desktop, default to expanded for advanced filter
+            shouldCollapse = false;
+        }
+        
+        if (shouldCollapse) {
             filterSection.classList.add('collapsed');
         }
         
