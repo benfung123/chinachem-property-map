@@ -1149,7 +1149,17 @@ body {
     }
     
     .chart-container {
-        display: none;
+        display: block;
+        margin-bottom: 0.75rem;
+    }
+    
+    .chart-container h4 {
+        font-size: 0.7rem;
+        margin-bottom: 0.35rem;
+    }
+    
+    .chart-container canvas {
+        max-height: 80px !important;
     }
     
     .filter-group {
@@ -1204,7 +1214,12 @@ body {
     }
     
     .property-list {
-        padding: 0.25rem;
+        flex: 1;
+        max-height: none;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+        touch-action: pan-y;
     }
     
     .property-item {
