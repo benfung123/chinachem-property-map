@@ -11,11 +11,18 @@ const properties = [
         complex: "Nina Tower",
         address: "荃灣楊屋道8號",
         addressEn: "8 Yeung Uk Road, Tsuen Wan",
+        district: "tsuen_wan",
         coordinates: [22.3697, 114.1146],
-        description: "新界最高建築，88層甲級寫字樓 + 商場 + 酒店",
+        description: "新界最高建築，88層甲級寫字樓 + 商場 + 酒店。連接荃灣西站，交通便捷，坐擁新界甲級寫字樓市場領導地位。",
         year: 2006,
         floors: 88,
-        area: "357,000平方呎"
+        area: "357,000平方呎",
+        availability: "available",
+        amenities: ["MTR", "Parking", "Retail", "Food"],
+        nearby: [
+            {name: "荃灣西站", type: "transport", distance: "200m"},
+            {name: "如心廣場商場", type: "retail", distance: "50m"}
+        ]
     },
     {
         id: 2,
@@ -24,11 +31,15 @@ const properties = [
         category: "commercial",
         address: "中環德輔道中26號",
         addressEn: "26 Des Voeux Road Central, Central",
+        district: "central",
         coordinates: [22.2831, 114.1565],
-        description: "中環甲級商廈，16層，2016年落成",
+        description: "中環甲級商廈，16層，2016年落成。位處中環核心商業區，交通便利，鄰近港鐵中環站。",
         year: 2016,
         floors: 16,
-        area: "38,000平方呎"
+        area: "38,000平方呎",
+        availability: "leased",
+        amenities: ["MTR", "Parking"],
+        nearby: [{name: "中環港鐵站", type: "transport", distance: "300m"}]
     },
     {
         id: 3,
@@ -37,11 +48,15 @@ const properties = [
         category: "commercial",
         address: "中環德輔道中26號",
         addressEn: "26 Des Voeux Road Central, Central",
+        district: "central",
         coordinates: [22.2829, 114.1563],
-        description: "中環甲級商廈，22層，2017年落成",
+        description: "中環甲級商廈，22層，2017年落成。與一期組成華懋中心綜合項目，提供優質辦公空間。",
         year: 2017,
         floors: 22,
-        area: "60,000平方呎"
+        area: "60,000平方呎",
+        availability: "available",
+        amenities: ["MTR", "Parking"],
+        nearby: [{name: "中環港鐵站", type: "transport", distance: "300m"}]
     },
     {
         id: 4,
@@ -50,11 +65,15 @@ const properties = [
         category: "commercial",
         address: "中環干諾道中34-37號",
         addressEn: "34-37 Connaught Road Central, Central",
+        district: "central",
         coordinates: [22.2850, 114.1570],
-        description: "中環核心商業區單一業權商廈，鄰近中環港鐵站",
+        description: "中環核心商業區單一業權商廈，鄰近中環港鐵站，地理位置優越。",
         year: null,
         floors: null,
-        area: null
+        area: null,
+        availability: "leased",
+        amenities: ["MTR"],
+        nearby: [{name: "中環港鐵站", type: "transport", distance: "200m"}]
     },
     {
         id: 5,
@@ -63,11 +82,16 @@ const properties = [
         category: "commercial",
         address: "灣仔告士打道178號",
         addressEn: "178 Gloucester Road, Wan Chai",
+        district: "wan_chai",
         coordinates: [22.2785, 114.1725],
-        description: "灣仔單一業權商廈，1994年落成，26層辦公樓",
+        description: "灣仔單一業權商廈，1994年落成，26層辦公樓，位處灣仔商業核心地段。",
         year: 1994,
         floors: 26,
-        area: "93,000平方呎"
+        area: "93,000平方呎",
+        availability: "coming_soon",
+        leaseExpiry: "2026-06-30",
+        amenities: ["MTR", "Parking"],
+        nearby: [{name: "灣仔港鐵站", type: "transport", distance: "400m"}]
     },
     {
         id: 6,
@@ -76,11 +100,15 @@ const properties = [
         category: "commercial",
         address: "灣仔軒尼詩道1號",
         addressEn: "1 Hennessy Road, Wan Chai",
+        district: "wan_chai",
         coordinates: [22.2769, 114.1715],
-        description: "灣仔甲級商廈",
+        description: "灣仔甲級商廈，位處軒尼詩道與軍器廠街交界，交通便捷。",
         year: null,
         floors: null,
-        area: null
+        area: null,
+        availability: "available",
+        amenities: ["MTR"],
+        nearby: [{name: "灣仔港鐵站", type: "transport", distance: "300m"}]
     },
     {
         id: 7,
@@ -89,11 +117,15 @@ const properties = [
         category: "commercial",
         address: "尖沙咀麼地道",
         addressEn: "Cameron Road, Tsim Sha Tsui",
+        district: "yau_tsim_mong",
         coordinates: [22.2995, 114.1735],
-        description: "尖沙咀商業中心",
+        description: "尖沙咀商業中心，鄰近尖沙咀東港鐵站，交通便利。",
         year: null,
         floors: null,
-        area: null
+        area: null,
+        availability: "leased",
+        amenities: ["MTR"],
+        nearby: [{name: "尖沙咀東站", type: "transport", distance: "250m"}]
     },
     {
         id: 8,
@@ -102,11 +134,15 @@ const properties = [
         category: "commercial",
         address: "尖沙咀麼地道",
         addressEn: "Cameron Road, Tsim Sha Tsui",
+        district: "yau_tsim_mong",
         coordinates: [22.2990, 114.1740],
-        description: "尖沙咀商業中心二期",
+        description: "尖沙咀商業中心二期，與一期組成綜合商業項目。",
         year: null,
         floors: null,
-        area: null
+        area: null,
+        availability: "available",
+        amenities: ["MTR"],
+        nearby: [{name: "尖沙咀東站", type: "transport", distance: "250m"}]
     },
     {
         id: 9,
@@ -115,11 +151,15 @@ const properties = [
         category: "commercial",
         address: "尖沙咀麼地道",
         addressEn: "Cameron Road, Tsim Sha Tsui",
+        district: "yau_tsim_mong",
         coordinates: [22.2985, 114.1730],
-        description: "尖沙咀商業大廈",
+        description: "尖沙咀商業大廈，位處麼地道商業區，鄰近多個購物商場。",
         year: null,
         floors: null,
-        area: null
+        area: null,
+        availability: "leased",
+        amenities: ["MTR", "Retail"],
+        nearby: [{name: "尖沙咀東站", type: "transport", distance: "300m"}]
     },
     {
         id: 10,
@@ -128,11 +168,15 @@ const properties = [
         category: "commercial",
         address: "何文田窩打老道",
         addressEn: "Waterloo Road, Ho Man Tin",
+        district: "kowloon_city",
         coordinates: [22.3165, 114.1735],
-        description: "何文田商業大廈",
+        description: "何文田商業大廈，位處窩打老道，鄰近何文田港鐵站。",
         year: null,
         floors: null,
-        area: null
+        area: null,
+        availability: "available",
+        amenities: ["MTR", "Parking"],
+        nearby: [{name: "何文田站", type: "transport", distance: "400m"}]
     },
     {
         id: 11,
@@ -141,11 +185,15 @@ const properties = [
         category: "commercial",
         address: "銅鑼灣加路連山道",
         addressEn: "Caroline Hill Road, Causeway Bay",
+        district: "wan_chai",
         coordinates: [22.2794, 114.1861],
-        description: "華懋與希慎興業合作，綠色商業地標，總面積逾100萬平方呎",
+        description: "華懋與希慎興業合作，綠色商業地標，總面積逾100萬平方呎，2026年落成。",
         year: 2026,
         floors: null,
-        area: "1,000,000+平方呎"
+        area: "1,000,000+平方呎",
+        availability: "coming_soon",
+        amenities: ["MTR", "Retail", "Food"],
+        nearby: [{name: "銅鑼灣站", type: "transport", distance: "500m"}]
     },
 
     // 零售商場 Retail
@@ -157,11 +205,15 @@ const properties = [
         complex: "Nina Tower",
         address: "荃灣楊屋道8號",
         addressEn: "8 Yeung Uk Road, Tsuen Wan",
+        district: "tsuen_wan",
         coordinates: [22.3695, 114.1140],
-        description: "如心廣場基層商場",
+        description: "如心廣場基層商場，提供多元化購物及餐飲選擇。",
         year: 2006,
         floors: 3,
-        area: null
+        area: null,
+        availability: "na",
+        amenities: ["MTR", "Parking", "Food"],
+        nearby: [{name: "荃灣西站", type: "transport", distance: "200m"}]
     },
     {
         id: 22,
@@ -170,11 +222,15 @@ const properties = [
         category: "retail",
         address: "荃灣青山公路",
         addressEn: "Castle Peak Road, Tsuen Wan",
+        district: "tsuen_wan",
         coordinates: [22.3760, 114.1115],
-        description: "大型購物商場，2024年6月收購",
+        description: "大型購物商場，2024年6月收購，佔地630,000平方呎，提供一站式購物體驗。",
         year: null,
         floors: null,
-        area: "630,000平方呎"
+        area: "630,000平方呎",
+        availability: "na",
+        amenities: ["MTR", "Parking", "Retail", "Food"],
+        nearby: [{name: "荃灣站", type: "transport", distance: "600m"}]
     },
     {
         id: 23,
@@ -183,11 +239,15 @@ const properties = [
         category: "retail",
         address: "中環皇后大道中",
         addressEn: "Queen's Road Central, Central",
+        district: "central",
         coordinates: [22.2840, 114.1560],
-        description: "保育活化項目，飲食購物體驗",
+        description: "保育活化項目，飲食購物體驗，2021年重新開幕，成為中環新地標。",
         year: 2021,
         floors: null,
-        area: null
+        area: null,
+        availability: "na",
+        amenities: ["MTR", "Retail", "Food"],
+        nearby: [{name: "中環站", type: "transport", distance: "200m"}]
     },
     {
         id: 24,
@@ -197,11 +257,15 @@ const properties = [
         complex: "Nina Tower",
         address: "荃灣楊屋道8號",
         addressEn: "8 Yeung Uk Road, Tsuen Wan",
+        district: "tsuen_wan",
         coordinates: [22.3685, 114.1135],
-        description: "如心廣場一期商場，170,000平方呎，55間商舖",
+        description: "如心廣場一期商場，170,000平方呎，55間商舖，提供多元購物選擇。",
         year: null,
         floors: null,
-        area: "170,000平方呎"
+        area: "170,000平方呎",
+        availability: "na",
+        amenities: ["MTR", "Parking", "Retail", "Food"],
+        nearby: [{name: "荃灣西站", type: "transport", distance: "150m"}]
     },
     {
         id: 25,
@@ -211,11 +275,15 @@ const properties = [
         complex: "Nina Tower",
         address: "荃灣西站",
         addressEn: "Tsuen Wan West",
+        district: "tsuen_wan",
         coordinates: [22.3710, 114.1160],
-        description: "如心廣場二期商場，100,000平方呎，44間商舖",
+        description: "如心廣場二期商場，100,000平方呎，44間商舖，連接荃灣西站。",
         year: null,
         floors: null,
-        area: "100,000平方呎"
+        area: "100,000平方呎",
+        availability: "na",
+        amenities: ["MTR", "Retail", "Food"],
+        nearby: [{name: "荃灣西站", type: "transport", distance: "100m"}]
     },
 
     // 住宅項目 Residential (Currently Available Only)
@@ -226,11 +294,15 @@ const properties = [
         category: "residential",
         address: "何文田忠孝街1號",
         addressEn: "1 Chung Hau Street, Ho Man Tin",
+        district: "kowloon_city",
         coordinates: [22.3160, 114.1830],
-        description: "何文田豪宅項目，現正發售",
+        description: "何文田豪宅項目，現正發售。位處何文田傳統豪宅區，鄰近港鐵站，交通便利。",
         year: null,
         floors: null,
-        area: null
+        area: null,
+        availability: "na",
+        amenities: ["MTR"],
+        nearby: [{name: "何文田站", type: "transport", distance: "300m"}]
     },
     {
         id: 32,
@@ -239,11 +311,15 @@ const properties = [
         category: "residential",
         address: "西貢白沙灣162號",
         addressEn: "162 Hiram's Highway, Hebe Haven, Sai Kung",
+        district: "sai_kung",
         coordinates: [22.3830, 114.2660],
-        description: "西貢低密度尊貴住宅，40戶臨海洋房，現正發售",
+        description: "西貢低密度尊貴住宅，40戶臨海洋房，現正發售。面積由833至3,162平方呎。",
         year: null,
         floors: null,
-        area: "833-3,162平方呎"
+        area: "833-3,162平方呎",
+        availability: "na",
+        amenities: ["Parking"],
+        nearby: [{name: "白沙灣碼頭", type: "transport", distance: "500m"}]
     },
 
     // 酒店 Hotels
@@ -255,11 +331,18 @@ const properties = [
         complex: "Nina Tower",
         address: "荃灣楊屋道8號",
         addressEn: "8 Yeung Uk Road, Tsuen Wan",
+        district: "tsuen_wan",
         coordinates: [22.3700, 114.1150],
         description: "五星級酒店，1,608間客房及套房，新界最高建築。設施包括RÚ中餐廳、Café Circles自助餐廳、室外泳池、健身中心。3,617平方米會議場地（全港最大）。",
         year: 2006,
         floors: 88,
         area: "1,608間客房",
+        availability: "na",
+        amenities: ["MTR", "Parking", "Pool", "Gym", "Food"],
+        nearby: [
+            {name: "荃灣西站", type: "transport", distance: "200m"},
+            {name: "如心廣場商場", type: "retail", distance: "50m"}
+        ],
         contact: "+852 2280 2898",
         email: "info.tww@ninahotelgroup.com",
         website: "https://www.ninahotelgroup.com/en/nina-hotel-tsuen-wan-west"
@@ -271,11 +354,15 @@ const properties = [
         category: "hotel",
         address: "銅鑼灣英皇道18號",
         addressEn: "18 King's Road, Causeway Bay",
+        district: "wan_chai",
         coordinates: [22.2780, 114.1920],
         description: "37層都會酒店，275間客房，鄰近天后港鐵站。設有室外泳池、健身室、阿翁小館粵菜餐廳、Nina Patisserie。",
         year: null,
         floors: 37,
         area: "275間客房",
+        availability: "na",
+        amenities: ["MTR", "Pool", "Gym", "Food"],
+        nearby: [{name: "天后站", type: "transport", distance: "200m"}],
         contact: "+852 3968 8388",
         email: "info.cwb@ninahotelgroup.com",
         website: "https://www.ninahotelgroup.com/en/nina-hotel-causeway-bay"
@@ -287,11 +374,15 @@ const properties = [
         category: "hotel",
         address: "香港仔黃竹坑道55號",
         addressEn: "55 Wong Chuk Hang Road, Aberdeen",
+        district: "southern",
         coordinates: [22.2480, 114.1550],
-        description: "精品酒店，位於黃竹坑商貿區，鄰近港鐵黃竹坑站",
+        description: "精品酒店，位於黃竹坑商貿區，鄰近港鐵黃竹坑站，適合商務及休閒旅客。",
         year: null,
         floors: null,
         area: null,
+        availability: "na",
+        amenities: ["MTR", "Food"],
+        nearby: [{name: "黃竹坑站", type: "transport", distance: "300m"}],
         website: "https://www.ninahotelgroup.com/en/nina-hotel-island-south"
     },
     {
@@ -301,11 +392,15 @@ const properties = [
         category: "hotel",
         address: "九龍灣創業街38號",
         addressEn: "38 Chung Yiu Street, Kowloon Bay",
+        district: "kwun_tong",
         coordinates: [22.3190, 114.2140],
-        description: "商務酒店，位於九龍東商貿區",
+        description: "商務酒店，位於九龍東商貿區，鄰近九龍灣港鐵站，適合商務旅客。",
         year: null,
         floors: null,
         area: null,
+        availability: "na",
+        amenities: ["MTR", "Food"],
+        nearby: [{name: "九龍灣站", type: "transport", distance: "400m"}],
         website: "https://www.ninahotelgroup.com/en/nina-hotel-kowloon-east"
     },
     {
@@ -315,11 +410,15 @@ const properties = [
         category: "hotel",
         address: "旺角廣東道1131號",
         addressEn: "1131 Canton Road, Mong Kok",
+        district: "yau_tsim_mong",
         coordinates: [22.3160, 114.1700],
-        description: "精品服務式住宅，位於旺角核心地帶",
+        description: "精品服務式住宅，位於旺角核心地帶，鄰近港鐵旺角站，提供靈活住宿方案。",
         year: null,
         floors: null,
         area: null,
+        availability: "na",
+        amenities: ["MTR", "Food"],
+        nearby: [{name: "旺角站", type: "transport", distance: "300m"}],
         website: "https://www.ninahotelgroup.com/en/lodgewood-mong-kok"
     },
     {
@@ -329,11 +428,15 @@ const properties = [
         category: "hotel",
         address: "灣仔莊士敦道60號",
         addressEn: "60 Johnston Road, Wan Chai",
+        district: "wan_chai",
         coordinates: [22.2760, 114.1750],
-        description: "服務式住宅，位於灣仔商業區",
+        description: "服務式住宅，位於灣仔商業區，鄰近港鐵灣仔站，適合中長期住宿。",
         year: null,
         floors: null,
         area: null,
+        availability: "na",
+        amenities: ["MTR", "Food"],
+        nearby: [{name: "灣仔站", type: "transport", distance: "350m"}],
         website: "https://www.ninahotelgroup.com/en/lodgewood-wan-chai"
     },
     {
@@ -343,11 +446,15 @@ const properties = [
         category: "hotel",
         address: "淺水灣道129號",
         addressEn: "129 Repulse Bay Road, Repulse Bay",
+        district: "southern",
         coordinates: [22.23542, 114.20007],
         description: "淺水灣豪華住宅項目，由Nina Hospitality管理。4座相連大樓設計如盛開百合花，100個單位(1,305-5,315平方呎)，建築師Sir Norman Foster，2010年落成，獲亞太區五星級高層建築獎。",
         year: 2010,
         floors: null,
-        area: "100個單位"
+        area: "100個單位",
+        availability: "na",
+        amenities: ["Pool", "Gym", "Parking"],
+        nearby: [{name: "淺水灣海灘", type: "retail", distance: "300m"}]
     },
 
     // 醫療護理 Healthcare - 松齡護老集團 (12間院舍)
@@ -358,11 +465,15 @@ const properties = [
         category: "healthcare",
         address: "銅鑼灣禮頓道1號",
         addressEn: "1 Leighton Road, Causeway Bay",
+        district: "wan_chai",
         coordinates: [22.2775, 114.1850],
-        description: "松齡旗艦院舍，尚耆·賢居系列，188床位",
+        description: "松齡旗艦院舍，尚耆·賢居系列，188床位，位處銅鑼灣核心地段，環境優美。",
         year: null,
         floors: 3,
-        area: "35,000平方呎"
+        area: "35,000平方呎",
+        availability: "na",
+        amenities: ["MTR"],
+        nearby: [{name: "銅鑼灣站", type: "transport", distance: "400m"}]
     },
     {
         id: 62,
@@ -371,11 +482,15 @@ const properties = [
         category: "healthcare",
         address: "西灣河筲箕灣道143-145號",
         addressEn: "143-145 Shau Kei Wan Road, Sai Wan Ho",
+        district: "eastern",
         coordinates: [22.2820, 114.2200],
-        description: "港島區護老院舍",
+        description: "港島區護老院舍，提供專業護理服務。",
         year: null,
         floors: 3,
-        area: null
+        area: null,
+        availability: "na",
+        amenities: ["MTR"],
+        nearby: [{name: "西灣河站", type: "transport", distance: "300m"}]
     },
     {
         id: 63,
@@ -384,11 +499,15 @@ const properties = [
         category: "healthcare",
         address: "觀塘通明街36號益利洋樓",
         addressEn: "Elly House, 36 Tung Ming Street, Kwun Tong",
+        district: "kwun_tong",
         coordinates: [22.3130, 114.2240],
-        description: "觀塘區護老院舍",
+        description: "觀塘區護老院舍，提供安老及護理服務。",
         year: null,
         floors: 2,
-        area: null
+        area: null,
+        availability: "na",
+        amenities: ["MTR"],
+        nearby: [{name: "觀塘站", type: "transport", distance: "500m"}]
     },
     {
         id: 64,
@@ -397,11 +516,15 @@ const properties = [
         category: "healthcare",
         address: "觀塘順利邨順利商場2期",
         addressEn: "Shun Lee Shopping Centre Phase 2, Shun Lee Estate, Kwun Tong",
+        district: "kwun_tong",
         coordinates: [22.3260, 114.2245],
-        description: "順利邨護老院舍",
+        description: "順利邨護老院舍，服務順利邨及鄰近社區長者。",
         year: null,
         floors: 3,
-        area: null
+        area: null,
+        availability: "na",
+        amenities: ["Retail"],
+        nearby: [{name: "順利商場", type: "retail", distance: "50m"}]
     },
     {
         id: 65,
@@ -410,11 +533,15 @@ const properties = [
         category: "healthcare",
         address: "觀塘順利邨利富樓1樓",
         addressEn: "Lee Foo House, Shun Lee Estate, Kwun Tong",
+        district: "kwun_tong",
         coordinates: [22.3250, 114.2250],
-        description: "順利邨護老院舍",
+        description: "順利邨護老院舍，位處順利邨利富樓，服務社區長者。",
         year: null,
         floors: 1,
-        area: null
+        area: null,
+        availability: "na",
+        amenities: [],
+        nearby: []
     },
     {
         id: 66,
@@ -423,11 +550,15 @@ const properties = [
         category: "healthcare",
         address: "石硤尾南昌街223-239號名都廣場",
         addressEn: "Maintown Plaza, 223-239 Nam Cheong Street, Shek Kip Mei",
+        district: "sham_shui_po",
         coordinates: [22.3310, 114.1620],
-        description: "認知障礙主題護老院舍",
+        description: "認知障礙主題護老院舍，專為認知障礙長者提供專業護理。",
         year: null,
         floors: 3,
-        area: null
+        area: null,
+        availability: "na",
+        amenities: ["MTR", "Retail"],
+        nearby: [{name: "石硤尾站", type: "transport", distance: "200m"}]
     },
     {
         id: 67,
@@ -436,11 +567,15 @@ const properties = [
         category: "healthcare",
         address: "慈雲山毓華街68-72號貫華里1號",
         addressEn: "1 Koon Wah Lane, 68-72 Yuk Wah Street, Tsz Wan Shan",
+        district: "wong_tai_sin",
         coordinates: [22.3480, 114.2000],
-        description: "慈雲山護老院舍",
+        description: "慈雲山護老院舍，服務慈雲山社區長者。",
         year: null,
         floors: 4,
-        area: null
+        area: null,
+        availability: "na",
+        amenities: [],
+        nearby: [{name: "慈雲山中心", type: "retail", distance: "400m"}]
     },
     {
         id: 68,
@@ -449,11 +584,15 @@ const properties = [
         category: "healthcare",
         address: "旺角荔枝角道85-91號德豐大廈",
         addressEn: "Tak Fung Building, 85-91 Lai Chi Kok Road, Mongkok",
+        district: "yau_tsim_mong",
         coordinates: [22.3230, 114.1670],
-        description: "旺角護老院舍",
+        description: "旺角護老院舍，位處旺角核心地段，交通便利。",
         year: null,
         floors: 3,
-        area: null
+        area: null,
+        availability: "na",
+        amenities: ["MTR"],
+        nearby: [{name: "旺角站", type: "transport", distance: "400m"}]
     },
     {
         id: 69,
@@ -462,11 +601,15 @@ const properties = [
         category: "healthcare",
         address: "元朗朗日路9號形點I",
         addressEn: "Yoho Mall I, 9 Long Yat Road, Yuen Long",
+        district: "yuen_long",
         coordinates: [22.4450, 114.0350],
-        description: "尚耆·賢居系列，豪華院舍，68床位，33,000平方呎",
+        description: "尚耆·賢居系列，豪華院舍，68床位，33,000平方呎，位處形點商場，環境優美。",
         year: null,
         floors: 4,
-        area: "33,000平方呎"
+        area: "33,000平方呎",
+        availability: "na",
+        amenities: ["MTR", "Retail", "Food"],
+        nearby: [{name: "元朗站", type: "transport", distance: "300m"}]
     },
     {
         id: 70,
@@ -475,11 +618,15 @@ const properties = [
         category: "healthcare",
         address: "葵涌興芳路180號運芳洋樓",
         addressEn: "Wan Fong Building, 180 Hing Fong Road, Kwai Chung",
+        district: "kwai_tsing",
         coordinates: [22.3580, 114.1270],
-        description: "葵芳護老院舍",
+        description: "葵芳護老院舍，服務葵涌及鄰近社區長者。",
         year: null,
         floors: 2,
-        area: null
+        area: null,
+        availability: "na",
+        amenities: ["MTR"],
+        nearby: [{name: "葵芳站", type: "transport", distance: "400m"}]
     },
     {
         id: 71,
@@ -488,11 +635,15 @@ const properties = [
         category: "healthcare",
         address: "荃灣西樓角路218-220號豪輝商業中心1座",
         addressEn: "Goodview Commercial Building, 218-220 Sai Lau Kok Road, Tsuen Wan",
+        district: "tsuen_wan",
         coordinates: [22.3720, 114.1150],
-        description: "荃灣區護老院舍",
+        description: "荃灣區護老院舍，位處荃灣市中心，交通便利。",
         year: null,
         floors: 2,
-        area: null
+        area: null,
+        availability: "na",
+        amenities: ["MTR"],
+        nearby: [{name: "荃灣站", type: "transport", distance: "300m"}]
     },
     {
         id: 72,
@@ -501,11 +652,15 @@ const properties = [
         category: "healthcare",
         address: "上水古洞北柏壽路6號福利服務綜合大樓4樓",
         addressEn: "4/F, Welfare Services Complex, 6 Pak Sau Road, Kwu Tung North, Sheung Shui",
+        district: "north",
         coordinates: [22.5020, 114.1030],
-        description: "政府合約院舍，松齡首間政府合約院舍",
+        description: "政府合約院舍，松齡首間政府合約院舍，服務北區長者。",
         year: null,
         floors: 1,
-        area: null
+        area: null,
+        availability: "na",
+        amenities: [],
+        nearby: []
     },
 
     // 其他 Others
@@ -517,12 +672,63 @@ const properties = [
         complex: "Nina Tower",
         address: "荃灣楊屋道8號旁",
         addressEn: "Next to 8 Yeung Uk Road, Tsuen Wan",
+        district: "tsuen_wan",
         coordinates: [22.3685, 114.1135],
-        description: "香港唯一木化石公園，佔地約7萬平方呎",
+        description: "香港唯一木化石公園，佔地約7萬平方呎，2023年開幕，設有木化石、園林景觀及文化活動。",
         year: 2023,
         floors: null,
-        area: "70,000平方呎"
+        area: "70,000平方呎",
+        availability: "na",
+        amenities: ["MTR"],
+        nearby: [{name: "荃灣西站", type: "transport", distance: "300m"}]
     }
+];
+
+// 地區配置
+const districtConfig = {
+    tsuen_wan: { label: "荃灣", labelEn: "Tsuen Wan", region: "new_territories" },
+    kwai_tsing: { label: "葵青", labelEn: "Kwai Tsing", region: "new_territories" },
+    tuen_mun: { label: "屯門", labelEn: "Tuen Mun", region: "new_territories" },
+    yuen_long: { label: "元朗", labelEn: "Yuen Long", region: "new_territories" },
+    north: { label: "北區", labelEn: "North", region: "new_territories" },
+    tai_po: { label: "大埔", labelEn: "Tai Po", region: "new_territories" },
+    sha_tin: { label: "沙田", labelEn: "Sha Tin", region: "new_territories" },
+    sai_kung: { label: "西貢", labelEn: "Sai Kung", region: "new_territories" },
+    kwun_tong: { label: "觀塘", labelEn: "Kwun Tong", region: "kowloon" },
+    wong_tai_sin: { label: "黃大仙", labelEn: "Wong Tai Sin", region: "kowloon" },
+    kowloon_city: { label: "九龍城", labelEn: "Kowloon City", region: "kowloon" },
+    sham_shui_po: { label: "深水埗", labelEn: "Sham Shui Po", region: "kowloon" },
+    yau_tsim_mong: { label: "油尖旺", labelEn: "Yau Tsim Mong", region: "kowloon" },
+    central: { label: "中西區", labelEn: "Central & Western", region: "hong_kong_island" },
+    wan_chai: { label: "灣仔", labelEn: "Wan Chai", region: "hong_kong_island" },
+    eastern: { label: "東區", labelEn: "Eastern", region: "hong_kong_island" },
+    southern: { label: "南區", labelEn: "Southern", region: "hong_kong_island" }
+};
+
+// 地區區域配置
+const regionConfig = {
+    all: { label: "全部地區", labelEn: "All Regions" },
+    new_territories: { label: "新界", labelEn: "New Territories" },
+    kowloon: { label: "九龍", labelEn: "Kowloon" },
+    hong_kong_island: { label: "港島", labelEn: "Hong Kong Island" }
+};
+
+// 可用狀態配置
+const availabilityConfig = {
+    all: { label: "全部", labelEn: "All", color: "#666" },
+    available: { label: "可租售", labelEn: "Available", color: "#22c55e" },
+    leased: { label: "已滿租", labelEn: "Leased", color: "#ef4444" },
+    coming_soon: { label: "即將到期", labelEn: "Coming Soon", color: "#eab308" },
+    na: { label: "不適用", labelEn: "N/A", color: "#9ca3af" }
+};
+
+// 年份範圍配置
+const yearRanges = [
+    { min: null, max: 1990, label: "1990年前", labelEn: "Before 1990" },
+    { min: 1990, max: 2000, label: "1990-2000", labelEn: "1990-2000" },
+    { min: 2000, max: 2010, label: "2000-2010", labelEn: "2000-2010" },
+    { min: 2010, max: 2020, label: "2010-2020", labelEn: "2010-2020" },
+    { min: 2020, max: null, label: "2020年後", labelEn: "After 2020" }
 ];
 
 // 類別配置
@@ -567,5 +773,5 @@ const categoryConfig = {
 
 // 導出數據（如果在模塊環境中使用）
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { properties, categoryConfig };
+    module.exports = { properties, categoryConfig, districtConfig, regionConfig, availabilityConfig, yearRanges };
 }

@@ -8,6 +8,9 @@
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
     
@@ -42,41 +45,101 @@
     <div class="main-container">
         <!-- Sidebar -->
         <aside class="sidebar">
-            <div class="filter-section" id="filter-section">
-                <div class="filter-header">
-                    <div class="filter-title-row">
-                        <h3 data-i18n="filter.title">🏷️ 物業類型篩選</h3>
-                        <span class="selected-filter-badge" id="selected-filter-badge"></span>
+            <!-- Portfolio Dashboard Widget -->
+            <div class="dashboard-section" id="dashboard-section">
+                <div class="dashboard-header">
+                    <div class="dashboard-title-row">
+                        <span class="dashboard-icon">📊</span>
+                        <h3 data-i18n="dashboard.title">Portfolio Dashboard</h3>
                     </div>
-                    <button class="collapse-btn" id="collapse-filter" title="收起/展開">
+                    <button class="collapse-btn" id="collapse-dashboard" title="收起/展開">
                         <span class="collapse-icon">▼</span>
                     </button>
                 </div>
-                <div class="filter-buttons" id="filter-buttons">
-                    <button class="filter-btn active" data-category="all">
-                        <span class="icon">📋</span> <span data-i18n="filter.all">全部顯示</span>
-                    </button>
-                    <button class="filter-btn" data-category="commercial">
-                        <span class="icon">🏢</span> <span data-i18n="filter.commercial">商業辦公</span>
-                    </button>
-                    <button class="filter-btn" data-category="retail">
-                        <span class="icon">🛍️</span> <span data-i18n="filter.retail">零售商場</span>
-                    </button>
-                    <button class="filter-btn" data-category="residential">
-                        <span class="icon">🏠</span> <span data-i18n="filter.residential">住宅項目</span>
-                    </button>
-                    <button class="filter-btn" data-category="hotel">
-                        <span class="icon">🏨</span> <span data-i18n="filter.hotel">酒店服務</span>
-                    </button>
-                    <button class="filter-btn" data-category="healthcare">
-                        <span class="icon">🏥</span> <span data-i18n="filter.healthcare">醫療護理</span>
-                    </button>
-                    <button class="filter-btn" data-category="other">
-                        <span class="icon">📍</span> <span data-i18n="filter.other">其他設施</span>
-                    </button>
+                <div class="dashboard-content" id="dashboard-content">
+                    <div class="dashboard-stats">
+                        <div class="dashboard-stat">
+                            <span class="dashboard-stat-number" id="dashboard-total">0</span>
+                            <span class="dashboard-stat-label" data-i18n="dashboard.total">總物業數</span>
+                        </div>
+                        <div class="dashboard-stat">
+                            <span class="dashboard-stat-number" id="dashboard-districts">0</span>
+                            <span class="dashboard-stat-label" data-i18n="dashboard.districts">覆蓋區域</span>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <h4 data-i18n="dashboard.categoryChart">物業類型分佈</h4>
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h4 data-i18n="dashboard.districtChart">地區分佈</h4>
+                        <canvas id="districtChart"></canvas>
+                    </div>
+                    <div class="dashboard-info">
+                        <div class="info-item">
+                            <span class="info-icon">🏗️</span>
+                            <span data-i18n="dashboard.newest">最新落成: <span id="newest-property">-</span></span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
+            <!-- Advanced Filter System -->
+            <div class="advanced-filter-section" id="advanced-filter-section">
+                <div class="filter-header">
+                    <div class="filter-title-row">
+                        <span class="filter-icon">🔍</span>
+                        <h3 data-i18n="advancedFilter.title">進階篩選</h3>
+                        <span class="active-filter-badge" id="active-filter-badge">0</span>
+                    </div>
+                    <button class="collapse-btn" id="collapse-advanced-filter" title="收起/展開">
+                        <span class="collapse-icon">▼</span>
+                    </button>
+                </div>
+                <div class="advanced-filter-content" id="advanced-filter-content">
+                    <!-- District Filter -->
+                    <div class="filter-group">
+                        <label class="filter-label" data-i18n="advancedFilter.district">📍 地區</label>
+                        <div class="region-chips" id="region-chips">
+                            <button class="region-chip active" data-region="all" data-i18n="advancedFilter.allRegions">全部地區</button>
+                            <button class="region-chip" data-region="new_territories" data-i18n="advancedFilter.newTerritories">新界</button>
+                            <button class="region-chip" data-region="kowloon" data-i18n="advancedFilter.kowloon">九龍</button>
+                            <button class="region-chip" data-region="hong_kong_island" data-i18n="advancedFilter.hongKongIsland">港島</button>
+                        </div>
+                        <div class="district-chips" id="district-chips">
+                            <!-- District chips will be generated by JS -->
+                        </div>
+                    </div>
+                    
+                    <!-- Year Range Filter -->
+                    <div class="filter-group">
+                        <label class="filter-label" data-i18n="advancedFilter.year">📅 落成年份</label>
+                        <div class="year-chips" id="year-chips">
+                            <!-- Year range chips will be generated by JS -->
+                        </div>
+                    </div>
+                    
+                    <!-- Availability Filter -->
+                    <div class="filter-group">
+                        <label class="filter-label" data-i18n="advancedFilter.availability">✅ 可用狀態</label>
+                        <div class="availability-chips" id="availability-chips">
+                            <!-- Availability chips will be generated by JS -->
+                        </div>
+                    </div>
+                    
+                    <!-- Category Filter (Existing) -->
+                    <div class="filter-group">
+                        <label class="filter-label" data-i18n="advancedFilter.category">🏢 物業類型</label>
+                        <div class="category-chips" id="category-chips">
+                            <!-- Category chips will be generated by JS -->
+                        </div>
+                    </div>
+                    
+                    <button class="clear-filters-btn" id="clear-filters-btn" data-i18n="advancedFilter.clearAll">清除所有篩選</button>
+                </div>
+            </div>
+
+            <!-- Property List Section -->
             <div class="property-list-section">
                 <h3 data-i18n="list.title">📑 物業列表</h3>
                 <div class="search-box">
@@ -95,29 +158,47 @@
             <!-- Legend -->
             <div class="legend">
                 <h4 data-i18n="legend.title">圖例</h4>
-                <div class="legend-item">
-                    <span class="legend-icon commercial"></span>
-                    <span data-i18n="legend.commercial">商業辦公</span>
+                <div class="legend-section">
+                    <h5 data-i18n="legend.category">物業類型</h5>
+                    <div class="legend-item">
+                        <span class="legend-icon commercial"></span>
+                        <span data-i18n="legend.commercial">商業辦公</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-icon retail"></span>
+                        <span data-i18n="legend.retail">零售商場</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-icon residential"></span>
+                        <span data-i18n="legend.residential">住宅項目</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-icon hotel"></span>
+                        <span data-i18n="legend.hotel">酒店服務</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-icon healthcare"></span>
+                        <span data-i18n="legend.healthcare">醫療護理</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-icon other"></span>
+                        <span data-i18n="legend.other">其他設施</span>
+                    </div>
                 </div>
-                <div class="legend-item">
-                    <span class="legend-icon retail"></span>
-                    <span data-i18n="legend.retail">零售商場</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-icon residential"></span>
-                    <span data-i18n="legend.residential">住宅項目</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-icon hotel"></span>
-                    <span data-i18n="legend.hotel">酒店服務</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-icon healthcare"></span>
-                    <span data-i18n="legend.healthcare">醫療護理</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-icon other"></span>
-                    <span data-i18n="legend.other">其他設施</span>
+                <div class="legend-section">
+                    <h5 data-i18n="legend.availability">可用狀態</h5>
+                    <div class="legend-item">
+                        <span class="legend-status available"></span>
+                        <span data-i18n="legend.statusAvailable">可租售</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-status leased"></span>
+                        <span data-i18n="legend.statusLeased">已滿租</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-status coming-soon"></span>
+                        <span data-i18n="legend.statusComingSoon">即將到期</span>
+                    </div>
                 </div>
             </div>
         </main>
