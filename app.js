@@ -476,42 +476,40 @@ function createPopupContent(property) {
         `;
     }
     
-    // 詳情標籤內容
+    // 詳情標籤內容 - 注意：不包含外層tab-content wrapper，由調用處統一包裹
     const detailsContent = `
-        <div class="tab-content" id="tab-details-${property.id}">
-            <div class="popup-details">
-                ${property.year ? `
-                <div class="detail-row">
-                    <span class="detail-label">${t.popup.year}</span>
-                    <span class="detail-value">${property.year}${currentLang === 'zh' ? '年' : ''}</span>
-                </div>` : ''}
-                ${property.floors ? `
-                <div class="detail-row">
-                    <span class="detail-label">${t.popup.floors}</span>
-                    <span class="detail-value">${property.floors}${currentLang === 'zh' ? '層' : ' floors'}</span>
-                </div>` : ''}
-                ${property.area ? `
-                <div class="detail-row">
-                    <span class="detail-label">${t.popup.area}</span>
-                    <span class="detail-value">${property.area}</span>
-                </div>` : ''}
-                ${property.contact ? `
-                <div class="detail-row">
-                    <span class="detail-label">📞</span>
-                    <span class="detail-value">${property.contact}</span>
-                </div>` : ''}
-                ${property.email ? `
-                <div class="detail-row">
-                    <span class="detail-label">✉️</span>
-                    <span class="detail-value">${property.email}</span>
-                </div>` : ''}
-                ${amenitiesHtml}
-            </div>
+        <div class="popup-details">
+            ${property.year ? `
+            <div class="detail-row">
+                <span class="detail-label">${t.popup.year}</span>
+                <span class="detail-value">${property.year}${currentLang === 'zh' ? '年' : ''}</span>
+            </div>` : ''}
+            ${property.floors ? `
+            <div class="detail-row">
+                <span class="detail-label">${t.popup.floors}</span>
+                <span class="detail-value">${property.floors}${currentLang === 'zh' ? '層' : ' floors'}</span>
+            </div>` : ''}
+            ${property.area ? `
+            <div class="detail-row">
+                <span class="detail-label">${t.popup.area}</span>
+                <span class="detail-value">${property.area}</span>
+            </div>` : ''}
+            ${property.contact ? `
+            <div class="detail-row">
+                <span class="detail-label">📞</span>
+                <span class="detail-value">${property.contact}</span>
+            </div>` : ''}
+            ${property.email ? `
+            <div class="detail-row">
+                <span class="detail-label">✉️</span>
+                <span class="detail-value">${property.email}</span>
+            </div>` : ''}
+            ${amenitiesHtml}
         </div>
     `;
     
-    // 周邊標籤內容
-    const nearbyContent = nearbyHtml || `<div class="tab-content" id="tab-nearby-${property.id}"><p class="no-data">-</p></div>`;
+    // 周邊標籤內容 - 只返回內容HTML，不包含wrapper
+    const nearbyContentHtml = nearbyHtml || '<p class="no-data">-</p>';
     
     return `
         <div class="popup-content tabbed-popup">
@@ -982,7 +980,7 @@ function getFilteredProperties() {
             const range = yearRanges[currentFilter.yearRange];
             if (!property.year) return false;
             if (range.min !== null && property.year < range.min) return false;
-            if (range.max !== null && property.year >= range.max) return false;
+            if (range.max !== null && property.year > range.max) return false;
         }
         
         // 可用狀態篩選
